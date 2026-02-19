@@ -160,10 +160,10 @@
             <Condition Enabled="false" Grouping="Or" />
             <Conditions />
           </Trigger>
-          <!-- 파티원 직업 정보 테스트: 아래 YOUR_WEBHOOK_URL을 실제 웹훅 URL로 교체 -->
+          <!-- 파티원 직업 정보 테스트: 아래 ${var:ff14notify_webhook}을 실제 웹훅 URL로 교체 -->
           <Trigger Enabled="true" Source="Log" Name="Party Job Test" Id="a1b2c3d4-0040-4000-8000-000000000002" RegularExpression="!ff14notify_partytest">
             <Actions>
-              <Action OrderNumber="1" ActionType="GenericJson" JsonEndpointExpression="YOUR_WEBHOOK_URL" JsonPayloadExpression="{&quot;embeds&quot;:[{&quot;title&quot;:&quot;Party Job Test&quot;,&quot;description&quot;:&quot;**[P1]** ${_ffxivparty[1].name} - job: ${_ffxivparty[1].job} / jobid: ${_ffxivparty[1].jobid}\n**[P2]** ${_ffxivparty[2].name} - job: ${_ffxivparty[2].job} / jobid: ${_ffxivparty[2].jobid}\n**[P3]** ${_ffxivparty[3].name} - job: ${_ffxivparty[3].job} / jobid: ${_ffxivparty[3].jobid}\n**[P4]** ${_ffxivparty[4].name} - job: ${_ffxivparty[4].job} / jobid: ${_ffxivparty[4].jobid}&quot;,&quot;color&quot;:10181046}]}">
+              <Action OrderNumber="1" ActionType="GenericJson" JsonEndpointExpression="${var:ff14notify_webhook}" JsonPayloadExpression="{&quot;embeds&quot;:[{&quot;title&quot;:&quot;Party Job Test&quot;,&quot;description&quot;:&quot;**[P1]** ${_ffxivparty[1].name} - job: ${_ffxivparty[1].job} / jobid: ${_ffxivparty[1].jobid}\n**[P2]** ${_ffxivparty[2].name} - job: ${_ffxivparty[2].job} / jobid: ${_ffxivparty[2].jobid}\n**[P3]** ${_ffxivparty[3].name} - job: ${_ffxivparty[3].job} / jobid: ${_ffxivparty[3].jobid}\n**[P4]** ${_ffxivparty[4].name} - job: ${_ffxivparty[4].job} / jobid: ${_ffxivparty[4].jobid}&quot;,&quot;color&quot;:10181046}]}">
                 <Condition Enabled="false" Grouping="Or" />
                 <Conditions />
               </Action>
@@ -171,10 +171,10 @@
             <Condition Enabled="false" Grouping="Or" />
             <Conditions />
           </Trigger>
-          <!-- AddCombatant(03) 로그 캡처 테스트: 아래 YOUR_WEBHOOK_URL을 실제 웹훅 URL로 교체 -->
+          <!-- AddCombatant(03) 로그 캡처 테스트: 아래 ${var:ff14notify_webhook}을 실제 웹훅 URL로 교체 -->
           <Trigger Enabled="true" Source="Log" Name="AddCombatant Job Capture" Id="a1b2c3d4-0040-4000-8000-000000000003" RegularExpression="03\|[^\|]*\|(?&lt;id&gt;[^\|]*)\|(?&lt;name&gt;[^\|]*)\|(?&lt;jobid&gt;[^\|]*)\|(?&lt;level&gt;[^\|]*)\|(?&lt;ownerid&gt;[^\|]*)\|(?&lt;worldid&gt;[^\|]*)\|(?&lt;world&gt;[^\|]*)">
             <Actions>
-              <Action OrderNumber="1" ActionType="GenericJson" JsonEndpointExpression="YOUR_WEBHOOK_URL" JsonPayloadExpression="{&quot;embeds&quot;:[{&quot;title&quot;:&quot;AddCombatant Detected&quot;,&quot;description&quot;:&quot;**name:** ${name}\n**jobid:** ${jobid}\n**level:** ${level}\n**world:** ${world}\n**id:** ${id}&quot;,&quot;color&quot;:3447003}]}">
+              <Action OrderNumber="1" ActionType="GenericJson" JsonEndpointExpression="${var:ff14notify_webhook}" JsonPayloadExpression="{&quot;embeds&quot;:[{&quot;title&quot;:&quot;AddCombatant Detected&quot;,&quot;description&quot;:&quot;**name:** ${name}\n**jobid:** ${jobid}\n**level:** ${level}\n**world:** ${world}\n**id:** ${id}&quot;,&quot;color&quot;:3447003}]}">
                 <Condition Enabled="false" Grouping="Or" />
                 <Conditions />
               </Action>
@@ -185,7 +185,7 @@
           <!-- StatusList(26) 로그 캡처 테스트: 파티원 상태 갱신 시 직업 정보 확인 -->
           <Trigger Enabled="true" Source="Log" Name="StatusList Job Capture" Id="a1b2c3d4-0040-4000-8000-000000000004" RegularExpression="26\|[^\|]*\|(?&lt;id&gt;[^\|]*)\|(?&lt;name&gt;[^\|]*)\|(?&lt;jobid&gt;[^\|]*)\|(?&lt;hp&gt;[^\|]*)\|(?&lt;maxhp&gt;[^\|]*)\|(?&lt;mp&gt;[^\|]*)\|(?&lt;maxmp&gt;[^\|]*)">
             <Actions>
-              <Action OrderNumber="1" ActionType="GenericJson" JsonEndpointExpression="YOUR_WEBHOOK_URL" JsonPayloadExpression="{&quot;embeds&quot;:[{&quot;title&quot;:&quot;StatusList(26) Detected&quot;,&quot;description&quot;:&quot;**name:** ${name}\n**jobid:** ${jobid}\n**hp:** ${hp}/${maxhp}\n**id:** ${id}&quot;,&quot;color&quot;:15844367}]}">
+              <Action OrderNumber="1" ActionType="GenericJson" JsonEndpointExpression="${var:ff14notify_webhook}" JsonPayloadExpression="{&quot;embeds&quot;:[{&quot;title&quot;:&quot;StatusList(26) Detected&quot;,&quot;description&quot;:&quot;**name:** ${name}\n**jobid:** ${jobid}\n**hp:** ${hp}/${maxhp}\n**id:** ${id}&quot;,&quot;color&quot;:15844367}]}">
                 <Condition Enabled="false" Grouping="Or" />
                 <Conditions />
               </Action>
@@ -200,7 +200,7 @@
                 <Condition Enabled="false" Grouping="Or" />
                 <Conditions />
               </Action>
-              <Action OrderNumber="2" ActionType="GenericJson" JsonEndpointExpression="YOUR_WEBHOOK_URL" JsonPayloadExpression="{&quot;embeds&quot;:[{&quot;title&quot;:&quot;Debug: Party Join Raw&quot;,&quot;description&quot;:&quot;**감지된 이름:** ${pname}\n\n이 메시지 전후로 StatusList(26) 또는 AddCombatant(03) 알림이 오는지 확인하세요.&quot;,&quot;color&quot;:16776960}]}">
+              <Action OrderNumber="2" ActionType="GenericJson" JsonEndpointExpression="${var:ff14notify_webhook}" JsonPayloadExpression="{&quot;embeds&quot;:[{&quot;title&quot;:&quot;Debug: Party Join Raw&quot;,&quot;description&quot;:&quot;**감지된 이름:** ${pname}\n\n이 메시지 전후로 StatusList(26) 또는 AddCombatant(03) 알림이 오는지 확인하세요.&quot;,&quot;color&quot;:16776960}]}">
                 <Condition Enabled="false" Grouping="Or" />
                 <Conditions />
               </Action>
