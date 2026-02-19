@@ -182,6 +182,32 @@
             <Condition Enabled="false" Grouping="Or" />
             <Conditions />
           </Trigger>
+          <!-- StatusList(26) 로그 캡처 테스트: 파티원 상태 갱신 시 직업 정보 확인 -->
+          <Trigger Enabled="true" Source="Log" Name="StatusList Job Capture" Id="a1b2c3d4-0040-4000-8000-000000000004" RegularExpression="26\|[^\|]*\|(?&lt;id&gt;[^\|]*)\|(?&lt;name&gt;[^\|]*)\|(?&lt;jobid&gt;[^\|]*)\|(?&lt;hp&gt;[^\|]*)\|(?&lt;maxhp&gt;[^\|]*)\|(?&lt;mp&gt;[^\|]*)\|(?&lt;maxmp&gt;[^\|]*)">
+            <Actions>
+              <Action OrderNumber="1" ActionType="GenericJson" JsonEndpointExpression="YOUR_WEBHOOK_URL" JsonPayloadExpression="{&quot;embeds&quot;:[{&quot;title&quot;:&quot;StatusList(26) Detected&quot;,&quot;description&quot;:&quot;**name:** ${name}\n**jobid:** ${jobid}\n**hp:** ${hp}/${maxhp}\n**id:** ${id}&quot;,&quot;color&quot;:15844367}]}">
+                <Condition Enabled="false" Grouping="Or" />
+                <Conditions />
+              </Action>
+            </Actions>
+            <Condition Enabled="false" Grouping="Or" />
+            <Conditions />
+          </Trigger>
+          <!-- Raw 로그 덤프: 파티 참가 전후 5초간 모든 로그 타입 확인용 -->
+          <Trigger Enabled="true" Source="Log" Name="Raw Log Dump (Party Join)" Id="a1b2c3d4-0040-4000-8000-000000000005" RegularExpression="^.*?00:(2039|2239)::(?&lt;pname&gt;.+?) 님이 파티에 (참가|참여)했습니다\.">
+            <Actions>
+              <Action OrderNumber="1" ActionType="Variable" VariableName="ff14notify_debug_name" VariableOp="SetString" VariableExpression="${pname}">
+                <Condition Enabled="false" Grouping="Or" />
+                <Conditions />
+              </Action>
+              <Action OrderNumber="2" ActionType="GenericJson" JsonEndpointExpression="YOUR_WEBHOOK_URL" JsonPayloadExpression="{&quot;embeds&quot;:[{&quot;title&quot;:&quot;Debug: Party Join Raw&quot;,&quot;description&quot;:&quot;**감지된 이름:** ${pname}\n\n이 메시지 전후로 StatusList(26) 또는 AddCombatant(03) 알림이 오는지 확인하세요.&quot;,&quot;color&quot;:16776960}]}">
+                <Condition Enabled="false" Grouping="Or" />
+                <Conditions />
+              </Action>
+            </Actions>
+            <Condition Enabled="false" Grouping="Or" />
+            <Conditions />
+          </Trigger>
         </Triggers>
       </Folder>
 
