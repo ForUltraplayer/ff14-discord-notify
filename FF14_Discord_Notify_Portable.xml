@@ -1,0 +1,169 @@
+<?xml version="1.0"?>
+<TriggernometryExport Version="1">
+  <ExportedFolder FFXIVJobFilterEnabled="false" FFXIVJobFilter="0" ZoneFilterEnabled="false" EventFilterEnabled="false" Id="a1b2c3d4-0001-4000-8000-000000000001" Name="FF14 Discord Notify (Portable)" Enabled="true">
+    <Folders>
+
+      <!-- ======================================== -->
+      <!-- [1] Settings - 설정 -->
+      <!-- ======================================== -->
+      <Folder FFXIVJobFilterEnabled="false" FFXIVJobFilter="0" ZoneFilterEnabled="false" EventFilterEnabled="false" Id="a1b2c3d4-0002-4000-8000-000000000001" Name="[1] Settings - 설정" Enabled="true">
+        <Folders />
+        <Triggers>
+          <!-- 세팅: !notify_set [주소] -->
+          <Trigger Enabled="true" Source="Log" Name="Set Webhook URL" Id="a1b2c3d4-0010-4000-8000-000000000002" RegularExpression="^.*?00:0038::!notify_set (?&lt;url&gt;https://discord\.com/api/webhooks/[\w\-/]+)">
+            <Actions>
+              <Action OrderNumber="1" ActionType="Variable" VariableName="ff14notify_webhook" VariableOp="SetString" VariableExpression="${url}">
+                <Condition Enabled="false" Grouping="Or" />
+                <Conditions />
+              </Action>
+              <Action OrderNumber="2" ActionType="GenericJson" JsonEndpointExpression="${url}" JsonPayloadExpression="{&quot;content&quot;:&quot;Webhook Linked!&quot;}">
+                <Condition Enabled="false" Grouping="Or" />
+                <Conditions />
+              </Action>
+            </Actions>
+            <Condition Enabled="false" Grouping="Or" />
+            <Conditions />
+          </Trigger>
+          <!-- 해제: !notify_off -->
+          <Trigger Enabled="true" Source="Log" Name="Unset Webhook (OFF)" Id="a1b2c3d4-0010-4000-8000-000000000003" RegularExpression="^.*?00:0038::!notify_off">
+            <Actions>
+              <Action OrderNumber="1" ActionType="Variable" VariableName="ff14notify_webhook" VariableOp="Unset">
+                <Condition Enabled="false" Grouping="Or" />
+                <Conditions />
+              </Action>
+            </Actions>
+            <Condition Enabled="false" Grouping="Or" />
+            <Conditions />
+          </Trigger>
+        </Triggers>
+      </Folder>
+
+      <!-- ======================================== -->
+      <!-- [2] Alerts - 알림 -->
+      <!-- ======================================== -->
+      <Folder FFXIVJobFilterEnabled="false" FFXIVJobFilter="0" ZoneFilterEnabled="false" EventFilterEnabled="false" Id="a1b2c3d4-0003-4000-8000-000000000001" Name="[2] Alerts - 알림" Enabled="true">
+        <Folders />
+        <Triggers>
+          <!-- 듀티 매칭 -->
+          <Trigger Enabled="true" Source="Log" Name="Duty Matched" Id="a1b2c3d4-0020-4000-8000-000000000001" RegularExpression="^.*?00:0039::(?&lt;content&gt;.*임무에 참가를 신청했습니다.*)">
+            <Actions>
+              <Action OrderNumber="1" ActionType="GenericJson" JsonEndpointExpression="${var:ff14notify_webhook}" JsonPayloadExpression="{&quot;embeds&quot;:[{&quot;title&quot;:&quot;Duty Matched&quot;,&quot;description&quot;:&quot;${content}&quot;,&quot;color&quot;:16711680}]}">
+                <Condition Enabled="false" Grouping="Or" />
+                <Conditions />
+              </Action>
+            </Actions>
+            <Condition Enabled="false" Grouping="Or" />
+            <Conditions />
+          </Trigger>
+          <!-- 파티원 참가 (서버) -->
+          <Trigger Enabled="true" Source="Log" Name="Party Join (Server)" Id="a1b2c3d4-0020-4000-8000-000000000010" RegularExpression="^.*?00:(2039|2239)::(?&lt;name&gt;.+)(?&lt;server&gt;카벙클|초코보|모그리|톤베리|펜리르) 님이 파티에 (참가|참여)했습니다\.">
+            <Actions>
+              <Action OrderNumber="1" ActionType="GenericJson" JsonEndpointExpression="${var:ff14notify_webhook}" JsonPayloadExpression="{&quot;embeds&quot;:[{&quot;title&quot;:&quot;Party Join&quot;,&quot;description&quot;:&quot;**${name}@${server}** joined&quot;,&quot;color&quot;:3066993}]}">
+                <Condition Enabled="false" Grouping="Or" />
+                <Conditions />
+              </Action>
+            </Actions>
+            <Condition Enabled="false" Grouping="Or" />
+            <Conditions />
+          </Trigger>
+          <!-- 파티원 참가 (로컬) -->
+          <Trigger Enabled="true" Source="Log" Name="Party Join (Local)" Id="a1b2c3d4-0020-4000-8000-000000000011" RegularExpression="^.*?00:(2039|2239)::(?&lt;name&gt;(?!.*(?:카벙클|초코보|모그리|톤베리|펜리르) 님이).+?) 님이 파티에 (참가|참여)했습니다\.">
+            <Actions>
+              <Action OrderNumber="1" ActionType="GenericJson" JsonEndpointExpression="${var:ff14notify_webhook}" JsonPayloadExpression="{&quot;embeds&quot;:[{&quot;title&quot;:&quot;Party Join&quot;,&quot;description&quot;:&quot;**${name}** joined&quot;,&quot;color&quot;:3066993}]}">
+                <Condition Enabled="false" Grouping="Or" />
+                <Conditions />
+              </Action>
+            </Actions>
+            <Condition Enabled="false" Grouping="Or" />
+            <Conditions />
+          </Trigger>
+          <!-- 파티원 퇴장 (서버) -->
+          <Trigger Enabled="true" Source="Log" Name="Party Leave (Server)" Id="a1b2c3d4-0020-4000-8000-000000000012" RegularExpression="^.*?00:(2039|2239|0039)::(?&lt;name&gt;.+)(?&lt;server&gt;카벙클|초코보|모그리|톤베리|펜리르) 님[이을의] 파티에서 탈퇴했습니다\.">
+            <Actions>
+              <Action OrderNumber="1" ActionType="GenericJson" JsonEndpointExpression="${var:ff14notify_webhook}" JsonPayloadExpression="{&quot;embeds&quot;:[{&quot;title&quot;:&quot;Party Leave&quot;,&quot;description&quot;:&quot;**${name}@${server}** left&quot;,&quot;color&quot;:15158332}]}">
+                <Condition Enabled="false" Grouping="Or" />
+                <Conditions />
+              </Action>
+            </Actions>
+            <Condition Enabled="false" Grouping="Or" />
+            <Conditions />
+          </Trigger>
+          <!-- 파티원 퇴장 (로컬) -->
+          <Trigger Enabled="true" Source="Log" Name="Party Leave (Local)" Id="a1b2c3d4-0020-4000-8000-000000000013" RegularExpression="^.*?00:(2039|2239|0039)::(?&lt;name&gt;(?!.*(?:카벙클|초코보|모그리|톤베리|펜리르) 님).+?) 님[이을의] 파티에서 탈퇴했습니다\.">
+            <Actions>
+              <Action OrderNumber="1" ActionType="GenericJson" JsonEndpointExpression="${var:ff14notify_webhook}" JsonPayloadExpression="{&quot;embeds&quot;:[{&quot;title&quot;:&quot;Party Leave&quot;,&quot;description&quot;:&quot;**${name}** left&quot;,&quot;color&quot;:15158332}]}">
+                <Condition Enabled="false" Grouping="Or" />
+                <Conditions />
+              </Action>
+            </Actions>
+            <Condition Enabled="false" Grouping="Or" />
+            <Conditions />
+          </Trigger>
+          <!-- 파티 해산 -->
+          <Trigger Enabled="true" Source="Log" Name="Party Disband" Id="a1b2c3d4-0020-4000-8000-000000000014" RegularExpression="^.*?00:(2039|2239|0039)::(서버 초월 파티(를|가) 해체(했|되었)습니다|파티(를|가) 해체(했|되었)습니다)\.">
+            <Actions>
+              <Action OrderNumber="1" ActionType="GenericJson" JsonEndpointExpression="${var:ff14notify_webhook}" JsonPayloadExpression="{&quot;embeds&quot;:[{&quot;title&quot;:&quot;Party Leave&quot;,&quot;description&quot;:&quot;파티가 해산되었습니다.&quot;,&quot;color&quot;:15158332}]}">
+                <Condition Enabled="false" Grouping="Or" />
+                <Conditions />
+              </Action>
+            </Actions>
+            <Condition Enabled="false" Grouping="Or" />
+            <Conditions />
+          </Trigger>
+        </Triggers>
+      </Folder>
+
+      <!-- ======================================== -->
+      <!-- [3] Party Chat - 파티 채팅 -->
+      <!-- ======================================== -->
+      <Folder FFXIVJobFilterEnabled="false" FFXIVJobFilter="0" ZoneFilterEnabled="false" EventFilterEnabled="false" Id="a1b2c3d4-0004-4000-8000-000000000001" Name="[3] Party Chat - 파티 채팅" Enabled="true">
+        <Folders />
+        <Triggers>
+          <!-- 채팅 (서버) -->
+          <Trigger Enabled="true" Source="Log" Name="Party Chat (Server)" Id="a1b2c3d4-0030-4000-8000-000000000010" RegularExpression="^.*?00:000[eE]:(?&lt;name&gt;.+)(?&lt;server&gt;카벙클|초코보|모그리|톤베리|펜리르):(?&lt;msg&gt;.*)">
+            <Actions>
+              <Action OrderNumber="1" ActionType="GenericJson" JsonEndpointExpression="${var:ff14notify_webhook}" JsonPayloadExpression="{&quot;content&quot;:&quot;**${name}@${server}**: ${msg}&quot;}">
+                <Condition Enabled="false" Grouping="Or" />
+                <Conditions />
+              </Action>
+            </Actions>
+            <Condition Enabled="false" Grouping="Or" />
+            <Conditions />
+          </Trigger>
+          <!-- 채팅 (로컬) -->
+          <Trigger Enabled="true" Source="Log" Name="Party Chat (Local)" Id="a1b2c3d4-0030-4000-8000-000000000011" RegularExpression="^.*?00:000[eE]:(?&lt;name&gt;(?!.*(?:카벙클|초코보|모그리|톤베리|펜리르):)[^:]+):(?&lt;msg&gt;.*)">
+            <Actions>
+              <Action OrderNumber="1" ActionType="GenericJson" JsonEndpointExpression="${var:ff14notify_webhook}" JsonPayloadExpression="{&quot;content&quot;:&quot;**${name}**: ${msg}&quot;}">
+                <Condition Enabled="false" Grouping="Or" />
+                <Conditions />
+              </Action>
+            </Actions>
+            <Condition Enabled="false" Grouping="Or" />
+            <Conditions />
+          </Trigger>
+        </Triggers>
+      </Folder>
+
+      <!-- ======================================== -->
+      <!-- [4] Test - 테스트 -->
+      <!-- ======================================== -->
+      <Folder FFXIVJobFilterEnabled="false" FFXIVJobFilter="0" ZoneFilterEnabled="false" EventFilterEnabled="false" Id="a1b2c3d4-0005-4000-8000-000000000001" Name="[4] Test - 테스트" Enabled="true">
+        <Folders />
+        <Triggers>
+          <Trigger Enabled="true" Source="Log" Name="Test Send" Id="a1b2c3d4-0040-4000-8000-000000000001" RegularExpression="!ff14notify_test">
+            <Actions>
+              <Action OrderNumber="1" ActionType="GenericJson" JsonEndpointExpression="${var:ff14notify_webhook}" JsonPayloadExpression="{&quot;embeds&quot;:[{&quot;title&quot;:&quot;FF14 Discord Notify - Test&quot;,&quot;description&quot;:&quot;Webhook OK!&quot;,&quot;color&quot;:3066993}]}">
+                <Condition Enabled="false" Grouping="Or" />
+                <Conditions />
+              </Action>
+            </Actions>
+            <Condition Enabled="false" Grouping="Or" />
+            <Conditions />
+          </Trigger>
+        </Triggers>
+      </Folder>
+
+    </Folders>
+    <Triggers />
+  </ExportedFolder>
+</TriggernometryExport>
