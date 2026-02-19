@@ -122,7 +122,6 @@ Discord에 `Webhook OK!` 메시지가 오면 정상 작동 중입니다.
 | Webhook 연결이 안 됨 | URL이 `https://discord.com/api/webhooks/`로 시작하는지 확인 |
 | `/e !ff14notify_test` 반응 없음 | Triggernometry에 트리거가 Import되었는지 확인, 폴더가 Enabled 상태인지 확인 |
 | 파티챗이 안 옴 | ACT 로그에서 파티챗의 채널코드가 `000E`인지 확인 |
-| 서버 이름이 안 나옴 | 서버 초월 파티에서만 서버명 표시됨 (같은 서버는 이름만 표시) |
 
 ## 주의사항
 
