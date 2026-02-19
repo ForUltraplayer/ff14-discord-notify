@@ -160,10 +160,10 @@
             <Condition Enabled="false" Grouping="Or" />
             <Conditions />
           </Trigger>
-          <!-- 파티원 직업 정보 테스트 -->
+          <!-- 파티원 직업 정보 테스트: 아래 YOUR_WEBHOOK_URL을 실제 웹훅 URL로 교체 -->
           <Trigger Enabled="true" Source="Log" Name="Party Job Test" Id="a1b2c3d4-0040-4000-8000-000000000002" RegularExpression="!ff14notify_partytest">
             <Actions>
-              <Action OrderNumber="1" ActionType="GenericJson" JsonEndpointExpression="${var:ff14notify_webhook}" JsonPayloadExpression="{&quot;embeds&quot;:[{&quot;title&quot;:&quot;Party Job Test&quot;,&quot;description&quot;:&quot;**[P1]** ${_ffxivparty[1].name} - job: ${_ffxivparty[1].job} / jobKR: ${_ffxivparty[1].jobKR} / jobid: ${_ffxivparty[1].jobid}\n**[P2]** ${_ffxivparty[2].name} - job: ${_ffxivparty[2].job} / jobKR: ${_ffxivparty[2].jobKR} / jobid: ${_ffxivparty[2].jobid}\n**[P3]** ${_ffxivparty[3].name} - job: ${_ffxivparty[3].job} / jobKR: ${_ffxivparty[3].jobKR} / jobid: ${_ffxivparty[3].jobid}\n**[P4]** ${_ffxivparty[4].name} - job: ${_ffxivparty[4].job} / jobKR: ${_ffxivparty[4].jobKR} / jobid: ${_ffxivparty[4].jobid}\n**[P5]** ${_ffxivparty[5].name} - job: ${_ffxivparty[5].job} / jobKR: ${_ffxivparty[5].jobKR} / jobid: ${_ffxivparty[5].jobid}\n**[P6]** ${_ffxivparty[6].name} - job: ${_ffxivparty[6].job} / jobKR: ${_ffxivparty[6].jobKR} / jobid: ${_ffxivparty[6].jobid}\n**[P7]** ${_ffxivparty[7].name} - job: ${_ffxivparty[7].job} / jobKR: ${_ffxivparty[7].jobKR} / jobid: ${_ffxivparty[7].jobid}\n**[P8]** ${_ffxivparty[8].name} - job: ${_ffxivparty[8].job} / jobKR: ${_ffxivparty[8].jobKR} / jobid: ${_ffxivparty[8].jobid}&quot;,&quot;color&quot;:10181046}]}">
+              <Action OrderNumber="1" ActionType="GenericJson" JsonEndpointExpression="YOUR_WEBHOOK_URL" JsonPayloadExpression="{&quot;embeds&quot;:[{&quot;title&quot;:&quot;Party Job Test&quot;,&quot;description&quot;:&quot;**[P1]** ${_ffxivparty[1].name} - job: ${_ffxivparty[1].job} / jobid: ${_ffxivparty[1].jobid}\n**[P2]** ${_ffxivparty[2].name} - job: ${_ffxivparty[2].job} / jobid: ${_ffxivparty[2].jobid}\n**[P3]** ${_ffxivparty[3].name} - job: ${_ffxivparty[3].job} / jobid: ${_ffxivparty[3].jobid}\n**[P4]** ${_ffxivparty[4].name} - job: ${_ffxivparty[4].job} / jobid: ${_ffxivparty[4].jobid}&quot;,&quot;color&quot;:10181046}]}">
                 <Condition Enabled="false" Grouping="Or" />
                 <Conditions />
               </Action>
@@ -171,10 +171,10 @@
             <Condition Enabled="false" Grouping="Or" />
             <Conditions />
           </Trigger>
-          <!-- AddCombatant(03) 로그 캡처 테스트: 파티원 접선 시 직업 정보 확인 -->
+          <!-- AddCombatant(03) 로그 캡처 테스트: 아래 YOUR_WEBHOOK_URL을 실제 웹훅 URL로 교체 -->
           <Trigger Enabled="true" Source="Log" Name="AddCombatant Job Capture" Id="a1b2c3d4-0040-4000-8000-000000000003" RegularExpression="03\|[^\|]*\|(?&lt;id&gt;[^\|]*)\|(?&lt;name&gt;[^\|]*)\|(?&lt;jobid&gt;[^\|]*)\|(?&lt;level&gt;[^\|]*)\|(?&lt;ownerid&gt;[^\|]*)\|(?&lt;worldid&gt;[^\|]*)\|(?&lt;world&gt;[^\|]*)">
             <Actions>
-              <Action OrderNumber="1" ActionType="GenericJson" JsonEndpointExpression="${var:ff14notify_webhook}" JsonPayloadExpression="{&quot;embeds&quot;:[{&quot;title&quot;:&quot;AddCombatant Detected&quot;,&quot;description&quot;:&quot;**name:** ${name}\n**jobid:** ${jobid}\n**level:** ${level}\n**world:** ${world}\n**id:** ${id}&quot;,&quot;color&quot;:3447003}]}">
+              <Action OrderNumber="1" ActionType="GenericJson" JsonEndpointExpression="YOUR_WEBHOOK_URL" JsonPayloadExpression="{&quot;embeds&quot;:[{&quot;title&quot;:&quot;AddCombatant Detected&quot;,&quot;description&quot;:&quot;**name:** ${name}\n**jobid:** ${jobid}\n**level:** ${level}\n**world:** ${world}\n**id:** ${id}&quot;,&quot;color&quot;:3447003}]}">
                 <Condition Enabled="false" Grouping="Or" />
                 <Conditions />
               </Action>
