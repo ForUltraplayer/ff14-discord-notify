@@ -23,12 +23,6 @@ FF14 한국서버 ACT + Triggernometry 기반 Discord 알림 트리거
 - [Triggernometry](https://github.com/paissaheavyindustries/Triggernometry)
 - Discord Webhook URL
 
-## 파일 설명
-
-| 파일 | 설명 | 용도 |
-|------|------|------|
-| `FF14_Discord_Notify_Portable.xml` | 게임 내 명령어로 Webhook 설정 | **배포용 (권장)** |
-| `FF14_Discord_Notify.xml` | Webhook URL 하드코딩 | 개인용 |
 
 ## 설치 방법
 
