@@ -171,6 +171,17 @@
             <Condition Enabled="false" Grouping="Or" />
             <Conditions />
           </Trigger>
+          <!-- AddCombatant(03) 로그 캡처 테스트: 파티원 접선 시 직업 정보 확인 -->
+          <Trigger Enabled="true" Source="Log" Name="AddCombatant Job Capture" Id="a1b2c3d4-0040-4000-8000-000000000003" RegularExpression="03\|[^\|]*\|(?&lt;id&gt;[^\|]*)\|(?&lt;name&gt;[^\|]*)\|(?&lt;jobid&gt;[^\|]*)\|(?&lt;level&gt;[^\|]*)\|(?&lt;ownerid&gt;[^\|]*)\|(?&lt;worldid&gt;[^\|]*)\|(?&lt;world&gt;[^\|]*)">
+            <Actions>
+              <Action OrderNumber="1" ActionType="GenericJson" JsonEndpointExpression="${var:ff14notify_webhook}" JsonPayloadExpression="{&quot;embeds&quot;:[{&quot;title&quot;:&quot;AddCombatant Detected&quot;,&quot;description&quot;:&quot;**name:** ${name}\n**jobid:** ${jobid}\n**level:** ${level}\n**world:** ${world}\n**id:** ${id}&quot;,&quot;color&quot;:3447003}]}">
+                <Condition Enabled="false" Grouping="Or" />
+                <Conditions />
+              </Action>
+            </Actions>
+            <Condition Enabled="false" Grouping="Or" />
+            <Conditions />
+          </Trigger>
         </Triggers>
       </Folder>
 
