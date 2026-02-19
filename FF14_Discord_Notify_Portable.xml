@@ -160,6 +160,17 @@
             <Condition Enabled="false" Grouping="Or" />
             <Conditions />
           </Trigger>
+          <!-- 파티원 직업 정보 테스트 -->
+          <Trigger Enabled="true" Source="Log" Name="Party Job Test" Id="a1b2c3d4-0040-4000-8000-000000000002" RegularExpression="!ff14notify_partytest">
+            <Actions>
+              <Action OrderNumber="1" ActionType="GenericJson" JsonEndpointExpression="${var:ff14notify_webhook}" JsonPayloadExpression="{&quot;embeds&quot;:[{&quot;title&quot;:&quot;Party Job Test&quot;,&quot;description&quot;:&quot;**[P1]** ${_ffxivparty[1].name} - job: ${_ffxivparty[1].job} / jobKR: ${_ffxivparty[1].jobKR} / jobid: ${_ffxivparty[1].jobid}\n**[P2]** ${_ffxivparty[2].name} - job: ${_ffxivparty[2].job} / jobKR: ${_ffxivparty[2].jobKR} / jobid: ${_ffxivparty[2].jobid}\n**[P3]** ${_ffxivparty[3].name} - job: ${_ffxivparty[3].job} / jobKR: ${_ffxivparty[3].jobKR} / jobid: ${_ffxivparty[3].jobid}\n**[P4]** ${_ffxivparty[4].name} - job: ${_ffxivparty[4].job} / jobKR: ${_ffxivparty[4].jobKR} / jobid: ${_ffxivparty[4].jobid}&quot;,&quot;color&quot;:10181046}]}">
+                <Condition Enabled="false" Grouping="Or" />
+                <Conditions />
+              </Action>
+            </Actions>
+            <Condition Enabled="false" Grouping="Or" />
+            <Conditions />
+          </Trigger>
         </Triggers>
       </Folder>
 
