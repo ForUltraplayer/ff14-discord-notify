@@ -100,9 +100,13 @@ Discord에 `Webhook Linked!` 메시지가 오면 성공입니다!
 
 Discord에 `Webhook OK!` 메시지가 오면 정상 작동 중입니다.
 
-## 지원 서버
+## 약간의 팁
 
-카벙클, 초코보, 모그리, 톤베리, 펜리르
+인게임 매크로에
+/echo notify_set {웹후크주소}
+
+/echo notify_unset 
+각각 만들어두면 편하게 사용 가능
 
 ## 알려진 제한사항
 
