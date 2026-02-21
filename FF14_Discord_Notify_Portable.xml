@@ -120,7 +120,7 @@
         <Folders />
         <Triggers>
           <!-- 채팅 (서버) -->
-          <Trigger Enabled="true" Source="Log" Name="Party Chat (Server)" Id="a1b2c3d4-0030-4000-8000-000000000010" RegularExpression="^.*?00:000[eE]:(?&lt;name&gt;.+)(?&lt;server&gt;카벙클|초코보|모그리|톤베리|펜리르):(?&lt;msg&gt;.*)">
+          <Trigger Enabled="true" Source="Log" Name="Party Chat (Server)" Id="a1b2c3d4-0030-4000-8000-000000000010" RegularExpression="^.*?00:000[eE]:[^a-zA-Z가-힣]*(?&lt;name&gt;.+)(?&lt;server&gt;카벙클|초코보|모그리|톤베리|펜리르):(?&lt;msg&gt;.*)">
             <Actions>
               <Action OrderNumber="1" ActionType="GenericJson" JsonEndpointExpression="${var:ff14notify_webhook}" JsonPayloadExpression="{&quot;content&quot;:&quot;**${name}@${server}**: ${msg}&quot;}">
                 <Condition Enabled="false" Grouping="Or" />
@@ -131,7 +131,7 @@
             <Conditions />
           </Trigger>
           <!-- 채팅 (로컬) -->
-          <Trigger Enabled="true" Source="Log" Name="Party Chat (Local)" Id="a1b2c3d4-0030-4000-8000-000000000011" RegularExpression="^.*?00:000[eE]:(?&lt;name&gt;(?!.*(?:카벙클|초코보|모그리|톤베리|펜리르):)[^:]+):(?&lt;msg&gt;.*)">
+          <Trigger Enabled="true" Source="Log" Name="Party Chat (Local)" Id="a1b2c3d4-0030-4000-8000-000000000011" RegularExpression="^.*?00:000[eE]:[^a-zA-Z가-힣]*(?&lt;name&gt;(?!.*(?:카벙클|초코보|모그리|톤베리|펜리르):)[^:]+):(?&lt;msg&gt;.*)">
             <Actions>
               <Action OrderNumber="1" ActionType="GenericJson" JsonEndpointExpression="${var:ff14notify_webhook}" JsonPayloadExpression="{&quot;content&quot;:&quot;**${name}**: ${msg}&quot;}">
                 <Condition Enabled="false" Grouping="Or" />
