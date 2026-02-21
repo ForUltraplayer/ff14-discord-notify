@@ -56,7 +56,7 @@
             <Conditions />
           </Trigger>
           <!-- 파티원 참가 (서버) -->
-          <Trigger Enabled="true" Source="Log" Name="Party Join (Server)" Id="a1b2c3d4-0020-4000-8000-000000000010" RegularExpression="^.*?00:[0-9a-f]{2}39::(?&lt;name&gt;.+)(?&lt;server&gt;카벙클|초코보|모그리|톤베리|펜리르) 님이 파티에 (참가|참여)했습니다\.">
+          <Trigger Enabled="true" Source="Log" Name="Party Join (Server)" Id="a1b2c3d4-0020-4000-8000-000000000010" RegularExpression="^.*?00:[0-9a-fA-F]{2}39::(?&lt;name&gt;.+)(?&lt;server&gt;카벙클|초코보|모그리|톤베리|펜리르) 님이 파티에 (참가|참여)했습니다\.">
             <Actions>
               <Action OrderNumber="1" ActionType="GenericJson" JsonEndpointExpression="${var:ff14notify_webhook}" JsonPayloadExpression="{&quot;embeds&quot;:[{&quot;title&quot;:&quot;Party Join&quot;,&quot;description&quot;:&quot;**${name}@${server}** joined&quot;,&quot;color&quot;:3066993}]}">
                 <Condition Enabled="false" Grouping="Or" />
@@ -67,7 +67,7 @@
             <Conditions />
           </Trigger>
           <!-- 파티원 참가 (로컬) -->
-          <Trigger Enabled="true" Source="Log" Name="Party Join (Local)" Id="a1b2c3d4-0020-4000-8000-000000000011" RegularExpression="^.*?00:[0-9a-f]{2}39::(?&lt;name&gt;(?!.*(?:카벙클|초코보|모그리|톤베리|펜리르) 님이).+?) 님이 파티에 (참가|참여)했습니다\.">
+          <Trigger Enabled="true" Source="Log" Name="Party Join (Local)" Id="a1b2c3d4-0020-4000-8000-000000000011" RegularExpression="^.*?00:[0-9a-fA-F]{2}39::(?&lt;name&gt;(?!.*(?:카벙클|초코보|모그리|톤베리|펜리르) 님이).+?) 님이 파티에 (참가|참여)했습니다\.">
             <Actions>
               <Action OrderNumber="1" ActionType="GenericJson" JsonEndpointExpression="${var:ff14notify_webhook}" JsonPayloadExpression="{&quot;embeds&quot;:[{&quot;title&quot;:&quot;Party Join&quot;,&quot;description&quot;:&quot;**${name}** joined&quot;,&quot;color&quot;:3066993}]}">
                 <Condition Enabled="false" Grouping="Or" />
@@ -78,7 +78,7 @@
             <Conditions />
           </Trigger>
           <!-- 파티원 퇴장 (서버) -->
-          <Trigger Enabled="true" Source="Log" Name="Party Leave (Server)" Id="a1b2c3d4-0020-4000-8000-000000000012" RegularExpression="^.*?00:[0-9a-f]{2}39::(?&lt;name&gt;.+)(?&lt;server&gt;카벙클|초코보|모그리|톤베리|펜리르) 님[이을의] 파티에서 탈퇴했습니다\.">
+          <Trigger Enabled="true" Source="Log" Name="Party Leave (Server)" Id="a1b2c3d4-0020-4000-8000-000000000012" RegularExpression="^.*?00:[0-9a-fA-F]{2}39::(?&lt;name&gt;.+)(?&lt;server&gt;카벙클|초코보|모그리|톤베리|펜리르) 님[이을의] 파티에서 탈퇴했습니다\.">
             <Actions>
               <Action OrderNumber="1" ActionType="GenericJson" JsonEndpointExpression="${var:ff14notify_webhook}" JsonPayloadExpression="{&quot;embeds&quot;:[{&quot;title&quot;:&quot;Party Leave&quot;,&quot;description&quot;:&quot;**${name}@${server}** left&quot;,&quot;color&quot;:15158332}]}">
                 <Condition Enabled="false" Grouping="Or" />
@@ -89,7 +89,7 @@
             <Conditions />
           </Trigger>
           <!-- 파티원 퇴장 (로컬) -->
-          <Trigger Enabled="true" Source="Log" Name="Party Leave (Local)" Id="a1b2c3d4-0020-4000-8000-000000000013" RegularExpression="^.*?00:[0-9a-f]{2}39::(?&lt;name&gt;(?!.*(?:카벙클|초코보|모그리|톤베리|펜리르) 님).+?) 님[이을의] 파티에서 탈퇴했습니다\.">
+          <Trigger Enabled="true" Source="Log" Name="Party Leave (Local)" Id="a1b2c3d4-0020-4000-8000-000000000013" RegularExpression="^.*?00:[0-9a-fA-F]{2}39::(?&lt;name&gt;(?!.*(?:카벙클|초코보|모그리|톤베리|펜리르) 님).+?) 님[이을의] 파티에서 탈퇴했습니다\.">
             <Actions>
               <Action OrderNumber="1" ActionType="GenericJson" JsonEndpointExpression="${var:ff14notify_webhook}" JsonPayloadExpression="{&quot;embeds&quot;:[{&quot;title&quot;:&quot;Party Leave&quot;,&quot;description&quot;:&quot;**${name}** left&quot;,&quot;color&quot;:15158332}]}">
                 <Condition Enabled="false" Grouping="Or" />
@@ -100,7 +100,7 @@
             <Conditions />
           </Trigger>
           <!-- 파티 해산 -->
-          <Trigger Enabled="true" Source="Log" Name="Party Disband" Id="a1b2c3d4-0020-4000-8000-000000000014" RegularExpression="^.*?00:[0-9a-f]{2}39::(서버 초월 파티(를|가) 해체(했|되었)습니다|파티(를|가) 해체(했|되었)습니다)\.">
+          <Trigger Enabled="true" Source="Log" Name="Party Disband" Id="a1b2c3d4-0020-4000-8000-000000000014" RegularExpression="^.*?00:[0-9a-fA-F]{2}39::(서버 초월 파티(를|가) 해체(했|되었)습니다|파티(를|가) 해체(했|되었)습니다)\.">
             <Actions>
               <Action OrderNumber="1" ActionType="GenericJson" JsonEndpointExpression="${var:ff14notify_webhook}" JsonPayloadExpression="{&quot;embeds&quot;:[{&quot;title&quot;:&quot;Party Leave&quot;,&quot;description&quot;:&quot;파티가 해산되었습니다.&quot;,&quot;color&quot;:15158332}]}">
                 <Condition Enabled="false" Grouping="Or" />
@@ -111,7 +111,7 @@
             <Conditions />
           </Trigger>
           <!-- 준비 확인 시작 (서버) -->
-          <Trigger Enabled="true" Source="Log" Name="Ready Check Start (Server)" Id="a1b2c3d4-0020-4000-8000-000000000016" RegularExpression="^.*?00:[0-9a-f]{2}39::(?&lt;name&gt;.+)(?&lt;server&gt;카벙클|초코보|모그리|톤베리|펜리르) 님이 준비 확인을 시작했습니다\.">
+          <Trigger Enabled="true" Source="Log" Name="Ready Check Start (Server)" Id="a1b2c3d4-0020-4000-8000-000000000016" RegularExpression="^.*?00:[0-9a-fA-F]{2}39::(?&lt;name&gt;.+)(?&lt;server&gt;카벙클|초코보|모그리|톤베리|펜리르) 님이 준비 확인을 시작했습니다\.">
             <Actions>
               <Action OrderNumber="1" ActionType="GenericJson" JsonEndpointExpression="${var:ff14notify_webhook}" JsonPayloadExpression="{&quot;embeds&quot;:[{&quot;title&quot;:&quot;Ready Check&quot;,&quot;description&quot;:&quot;**${name}@${server}** 님이 준비 확인을 시작했습니다.&quot;,&quot;color&quot;:16776960}]}">
                 <Condition Enabled="false" Grouping="Or" />
@@ -122,7 +122,7 @@
             <Conditions />
           </Trigger>
           <!-- 준비 확인 시작 (로컬) -->
-          <Trigger Enabled="true" Source="Log" Name="Ready Check Start (Local)" Id="a1b2c3d4-0020-4000-8000-000000000017" RegularExpression="^.*?00:[0-9a-f]{2}39::(?&lt;name&gt;(?!.*(?:카벙클|초코보|모그리|톤베리|펜리르) 님이).+?) 님이 준비 확인을 시작했습니다\.">
+          <Trigger Enabled="true" Source="Log" Name="Ready Check Start (Local)" Id="a1b2c3d4-0020-4000-8000-000000000017" RegularExpression="^.*?00:[0-9a-fA-F]{2}39::(?&lt;name&gt;(?!.*(?:카벙클|초코보|모그리|톤베리|펜리르) 님이).+?) 님이 준비 확인을 시작했습니다\.">
             <Actions>
               <Action OrderNumber="1" ActionType="GenericJson" JsonEndpointExpression="${var:ff14notify_webhook}" JsonPayloadExpression="{&quot;embeds&quot;:[{&quot;title&quot;:&quot;Ready Check&quot;,&quot;description&quot;:&quot;**${name}** 님이 준비 확인을 시작했습니다.&quot;,&quot;color&quot;:16776960}]}">
                 <Condition Enabled="false" Grouping="Or" />
