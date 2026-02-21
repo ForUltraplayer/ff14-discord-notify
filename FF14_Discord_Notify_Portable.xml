@@ -110,6 +110,50 @@
             <Condition Enabled="false" Grouping="Or" />
             <Conditions />
           </Trigger>
+          <!-- 준비 확인 시작 (서버) -->
+          <Trigger Enabled="true" Source="Log" Name="Ready Check Start (Server)" Id="a1b2c3d4-0020-4000-8000-000000000016" RegularExpression="^.*?00:0[12]39::(?&lt;name&gt;.+)(?&lt;server&gt;카벙클|초코보|모그리|톤베리|펜리르) 님이 준비 확인을 시작했습니다\.">
+            <Actions>
+              <Action OrderNumber="1" ActionType="GenericJson" JsonEndpointExpression="${var:ff14notify_webhook}" JsonPayloadExpression="{&quot;embeds&quot;:[{&quot;title&quot;:&quot;Ready Check&quot;,&quot;description&quot;:&quot;**${name}@${server}** 님이 준비 확인을 시작했습니다.&quot;,&quot;color&quot;:16776960}]}">
+                <Condition Enabled="false" Grouping="Or" />
+                <Conditions />
+              </Action>
+            </Actions>
+            <Condition Enabled="false" Grouping="Or" />
+            <Conditions />
+          </Trigger>
+          <!-- 준비 확인 시작 (로컬) -->
+          <Trigger Enabled="true" Source="Log" Name="Ready Check Start (Local)" Id="a1b2c3d4-0020-4000-8000-000000000017" RegularExpression="^.*?00:0[12]39::(?&lt;name&gt;(?!.*(?:카벙클|초코보|모그리|톤베리|펜리르) 님이).+?) 님이 준비 확인을 시작했습니다\.">
+            <Actions>
+              <Action OrderNumber="1" ActionType="GenericJson" JsonEndpointExpression="${var:ff14notify_webhook}" JsonPayloadExpression="{&quot;embeds&quot;:[{&quot;title&quot;:&quot;Ready Check&quot;,&quot;description&quot;:&quot;**${name}** 님이 준비 확인을 시작했습니다.&quot;,&quot;color&quot;:16776960}]}">
+                <Condition Enabled="false" Grouping="Or" />
+                <Conditions />
+              </Action>
+            </Actions>
+            <Condition Enabled="false" Grouping="Or" />
+            <Conditions />
+          </Trigger>
+          <!-- 준비 확인 결과 -->
+          <Trigger Enabled="true" Source="Log" Name="Ready Check Result" Id="a1b2c3d4-0020-4000-8000-000000000018" RegularExpression="^.*?00:0039::준비 확인이 끝났습니다\. (?&lt;result&gt;.+)">
+            <Actions>
+              <Action OrderNumber="1" ActionType="GenericJson" JsonEndpointExpression="${var:ff14notify_webhook}" JsonPayloadExpression="{&quot;embeds&quot;:[{&quot;title&quot;:&quot;Ready Check Result&quot;,&quot;description&quot;:&quot;준비 확인이 끝났습니다. ${result}&quot;,&quot;color&quot;:16776960}]}">
+                <Condition Enabled="false" Grouping="Or" />
+                <Conditions />
+              </Action>
+            </Actions>
+            <Condition Enabled="false" Grouping="Or" />
+            <Conditions />
+          </Trigger>
+          <!-- 파티 모집 완료 -->
+          <Trigger Enabled="true" Source="Log" Name="Recruitment Complete" Id="a1b2c3d4-0020-4000-8000-000000000015" RegularExpression="^.*?00:0039::인원이 모두 모집되어 파티 찾기를 종료합니다\.">
+            <Actions>
+              <Action OrderNumber="1" ActionType="GenericJson" JsonEndpointExpression="${var:ff14notify_webhook}" JsonPayloadExpression="{&quot;embeds&quot;:[{&quot;title&quot;:&quot;Recruitment Complete&quot;,&quot;description&quot;:&quot;인원이 모두 모집되어 파티 찾기를 종료합니다.&quot;,&quot;color&quot;:3447003}]}">
+                <Condition Enabled="false" Grouping="Or" />
+                <Conditions />
+              </Action>
+            </Actions>
+            <Condition Enabled="false" Grouping="Or" />
+            <Conditions />
+          </Trigger>
         </Triggers>
       </Folder>
 
